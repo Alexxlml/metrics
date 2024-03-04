@@ -51,6 +51,21 @@ it('Crear usuarios a partir de archivo fill.json', function () {
     expect($users[0]['full_name'])->toBe($user->name);
 });
 
+it('Asignar rol a usuario', function () {
+    // Arrange
+    $userToAsignRole = User::where('email', 'mazacarias45@metrics.test')->first();
+
+    // Act
+    $userToAsignRole->assignRole('Super Administrator');
+
+    $userWithRole = User::where('email', 'mazacarias45@metrics.test')
+        ->whereHas('roles', function ($query) {
+            $query->where('name', 'Super Administrator');
+        })
+        ->first();
+    // Assert
+    expect($userWithRole)->not->toBeNull();
+});
 
 
 function getUserEmail(array $user): String
