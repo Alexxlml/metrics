@@ -95,8 +95,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $dataCapturerRole = Role::where('name', 'Data Capturer')->first();
         $dataCapturerPermissions = array_filter($permissionsArray, function ($permission) {
             return strpos($permission, 'forms read') !== false ||
-                strpos($permission, 'forms delete') !== false ||
-                strpos($permission, 'users-capture-history show') !== false;
+                strpos($permission, 'forms delete') !== false;
         });
         $dataCapturerRole->syncPermissions($dataCapturerPermissions);
     }
