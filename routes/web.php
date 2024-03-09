@@ -25,4 +25,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/admin/panel-jerarquias', function () {
+        return view('hierarchies.main-hierarchies');
+    })->name('panel-jerarquias');
+
+    Route::get('/admin/agregar-jerarquia', function () {
+        return view('hierarchies.add-hierarchy');
+    })->name('agregar-jerarquia');
 });
