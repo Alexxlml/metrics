@@ -61,4 +61,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function boss()
+    {
+        return $this->hasOne(Hierarchy::class, 'subordinate_id');
+    }
+
+    public function subordinates()
+    {
+        return $this->hasMany(Hierarchy::class, 'boss_id');
+    }
 }
