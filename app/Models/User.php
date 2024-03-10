@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Hierarchy::class, 'boss_id');
     }
+
+    public function peopleForms()
+    {
+        return $this->hasMany(PeopleForm::class);
+    }
 }
