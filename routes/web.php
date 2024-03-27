@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\PeopleForms\EditPeopleForms;
+use App\Livewire\PeopleForms\MainPeopleForms;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +35,14 @@ Route::middleware([
     Route::get('/admin/agregar-jerarquia', function () {
         return view('hierarchies.add-hierarchy');
     })->name('agregar-jerarquia');
+
+    Route::get('/formularios/panel/{id}', MainPeopleForms::class)
+        ->name('panel-formularios');
+
+    Route::get('/formularios/agregar-formulario', function () {
+        return view('people-forms.add-people-forms');
+    })->name('agregar-formulario');
+
+    Route::get('/formularios/formulario/{id}', EditPeopleForms::class)
+        ->name('editar-formulario');
 });
