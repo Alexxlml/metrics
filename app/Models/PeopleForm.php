@@ -8,9 +8,9 @@ class PeopleForm extends Model
 {
     protected $fillable = [
         'user_id',
-        'firs_name',
+        'first_name',
         'second_name',
-        'firs_surname',
+        'first_surname',
         'second_surname',
         'electoral_key',
         'phone',
