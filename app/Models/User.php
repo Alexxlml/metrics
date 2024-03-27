@@ -76,4 +76,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(PeopleForm::class);
     }
+
+    public function bossIncidents()
+    {
+        return $this->hasMany(Incident::class, 'boss_id');
+    }
+
+    public function subordinateIncidents()
+    {
+        return $this->hasMany(Incident::class, 'subordinate_id');
+    }
 }
