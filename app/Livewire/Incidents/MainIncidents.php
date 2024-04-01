@@ -31,6 +31,15 @@ class MainIncidents extends Component
         $this->userFromView = $id;
         $this->ownerUserName = User::find($id)->name;
         $this->loggedUser = Auth::user()->id;
+
+        if (is_numeric($id)) {
+            if (!$this->checkuserFromViewOrBoss($this->userFromView)) {
+                abort(403, 'No tienes permiso para acceder a este contenido');
+            }
+        } else {
+            abort(404);
+        }
+
         $this->statuses = [
             'realizada',
             'rechazada',
