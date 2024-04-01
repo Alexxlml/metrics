@@ -41,7 +41,7 @@
                                 <x-input-error for="secondSurName" class="mt-2" />
                             </div>
                             <div class="col-span-6 sm:col-span-3">
-                                <x-label for="electoral_key">{{ __('Clave Electoral') }}</x-label>
+                                <x-label for="electoral_key">{{ __('Clave') }}</x-label>
                                 <x-input id="electoral_key" type="text" class="w-full cursor-not-allowed pointer-events-none disabled:opacity-50"
                                     wire:model.blur="electoral_key" disabled/>
                                 <x-input-error for="electoral_key" class="mt-2" />
