@@ -65,6 +65,7 @@ class RolesAndPermissionsSeeder extends Seeder
             return strpos($permission, 'calls') !== false ||
                 strpos($permission, 'forms create') !== false ||
                 strpos($permission, 'forms read') !== false ||
+                strpos($permission, 'forms update') !== false ||
                 strpos($permission, 'forms delete') !== false ||
                 strpos($permission, 'hierarchies') !== false ||
                 strpos($permission, 'reports') !== false ||
@@ -78,6 +79,7 @@ class RolesAndPermissionsSeeder extends Seeder
             return strpos($permission, 'calls') !== false ||
                 strpos($permission, 'forms create') !== false ||
                 strpos($permission, 'forms read') !== false ||
+                strpos($permission, 'forms update') !== false ||
                 strpos($permission, 'forms delete') !== false ||
                 strpos($permission, 'reports') !== false ||
                 strpos($permission, 'users-capture-history show') !== false;
@@ -89,6 +91,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $captureAnalystPermissions = array_filter($permissionsArray, function ($permission) {
             return strpos($permission, 'forms create') !== false ||
                 strpos($permission, 'forms read') !== false ||
+                strpos($permission, 'forms update') !== false ||
                 strpos($permission, 'forms delete') !== false ||
                 strpos($permission, 'users-capture-history show') !== false;
         });
