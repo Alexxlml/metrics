@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('incidents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->constrained('people_forms');
+            $table->foreignId('form_id')->constrained('people_forms')->cascadeOnDelete();
             $table->foreignId('boss_id')->constrained('users');
             $table->foreignId('subordinate_id')->constrained('users');
             $table->string('field_to_change');
