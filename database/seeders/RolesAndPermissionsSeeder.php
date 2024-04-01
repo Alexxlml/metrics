@@ -63,6 +63,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $administratorRole = Role::where('name', 'Administrator')->first();
         $administratorPermissions = array_filter($permissionsArray, function ($permission) {
             return strpos($permission, 'calls') !== false ||
+                strpos($permission, 'forms create') !== false ||
                 strpos($permission, 'forms read') !== false ||
                 strpos($permission, 'forms delete') !== false ||
                 strpos($permission, 'hierarchies') !== false ||
@@ -75,6 +76,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $supervisorRole = Role::where('name', 'Supervisor')->first();
         $supervisorPermissions = array_filter($permissionsArray, function ($permission) {
             return strpos($permission, 'calls') !== false ||
+                strpos($permission, 'forms create') !== false ||
                 strpos($permission, 'forms read') !== false ||
                 strpos($permission, 'forms delete') !== false ||
                 strpos($permission, 'reports') !== false ||
@@ -85,7 +87,8 @@ class RolesAndPermissionsSeeder extends Seeder
         // ? Capture Anlyst
         $captureAnalystRole = Role::where('name', 'Capture Analyst')->first();
         $captureAnalystPermissions = array_filter($permissionsArray, function ($permission) {
-            return strpos($permission, 'forms read') !== false ||
+            return strpos($permission, 'forms create') !== false ||
+                strpos($permission, 'forms read') !== false ||
                 strpos($permission, 'forms delete') !== false ||
                 strpos($permission, 'users-capture-history show') !== false;
         });
