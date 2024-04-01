@@ -28,7 +28,7 @@ class AddPeopleForms extends Component
     public $firstSurName;
     #[Validate('nullable|regex:/^[\pL\pM\s]+$/u|max:255', as: 'segundo apellido')]
     public $secondSurName;
-    #[Validate(as: 'clave electoral')]
+    #[Validate(as: 'clave')]
     public $electoral_key;
     #[Validate('required|numeric|digits:10', as: 'teléfono')]
     public $phone;
