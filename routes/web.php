@@ -3,6 +3,7 @@
 use App\Livewire\Incidents\MainIncidents;
 use App\Livewire\PeopleForms\EditPeopleForms;
 use App\Livewire\PeopleForms\MainPeopleForms;
+use App\Livewire\Subordinates\MainSubordinates;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,7 @@ Route::middleware([
     Route::get('/admin/agregar-jerarquia', function () {
         return view('hierarchies.add-hierarchy');
     })->name('agregar-jerarquia');
+
     // ! Forms
     Route::get('/formularios/panel/{id}', MainPeopleForms::class)
         ->name('panel-formularios');
@@ -51,4 +53,8 @@ Route::middleware([
     // ! Incidents
     Route::get('/incidentes/panel/{id}', MainIncidents::class)
         ->name('panel-incidentes');
+
+    // ! Subordinates
+    Route::get('/subordinados/panel/{id}', MainSubordinates::class)
+        ->name('panel-subordinados');
 });
