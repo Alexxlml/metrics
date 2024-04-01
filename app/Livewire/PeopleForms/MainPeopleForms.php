@@ -47,6 +47,7 @@ class MainPeopleForms extends Component
             'forms' => PeopleForm::with('neighborhood.town')
                 ->where('user_id', $this->userFromView)
                 ->paginate($this->perPage),
+            'count_forms' => PeopleForm::where('user_id', $this->userFromView)->count(),
         ]);
     }
 
