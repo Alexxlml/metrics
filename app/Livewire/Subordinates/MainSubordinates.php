@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Subordinates;
 
+use App\Models\PeopleForm;
 use Exception;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class MainSubordinates extends Component
@@ -39,6 +41,56 @@ class MainSubordinates extends Component
                 $query->where('boss_id', $this->userFromView);
             })->paginate($this->perPage),
         ]);
+    }
+
+    public function downloadCapturerPerAnalystListReport($id)
+    {
+        $data = [];
+
+        $subordinates = User::role('Data Capturer')
+            ->get();
+
+        foreach ($subordinates as $subordinate) {
+            $counter = PeopleForm::where('user_id', $subordinate->id)->count();
+            array_push($data, ['name' => $subordinate->name, 'form_counter' => $counter]);
+        }
+        
+        $pdf = Pdf::loadView('pdf.all_capturers_counter', [
+            'forms' => $data,
+        ])->setPaper('letter');
+
+        $pdf->output();
+        $domPdf = $pdf->getDomPDF();
+
+        $canvas = $domPdf->get_canvas();
+        $canvas->page_text(10, 10, 'Página {PAGE_NUM} de {PAGE_COUNT}', null, 10, [0, 0, 0]);
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'reporte_formularios_capturistas.pdf');
+    }
+
+    public function downloadCapturerReport($id)
+    {
+        $capturer_name = User::find($id)->name;
+        $count_forms = PeopleForm::where('user_id', $id)->count();
+        $forms = PeopleForm::where('user_id', $id)->get();
+
+        $pdf = Pdf::loadView('pdf.capturer_report', [
+            'capturer_name' => $capturer_name,
+            'count_forms' => $count_forms,
+            'forms' => $forms,
+        ])->setPaper('letter');
+
+        $pdf->output();
+        $domPdf = $pdf->getDomPDF();
+
+        $canvas = $domPdf->get_canvas();
+        $canvas->page_text(10, 10, $capturer_name . ' - Total: ' . $count_forms . ' - Página {PAGE_NUM} de {PAGE_COUNT}', null, 10, [0, 0, 0]);
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'reporte_' . str_replace(' ', '_', strtolower($capturer_name)) . '.pdf');
     }
 
     public function checkuserFromViewOrBoss($user_from_view): bool
