@@ -48,6 +48,9 @@
         <thead>
             <tr>
                 <th class="px-6 py-3 text-left">
+                    ID
+                </th>
+                <th class="px-6 py-3 text-left">
                     Nombre
                 </th>
                 <th class="px-6 py-3 text-left">
@@ -58,6 +61,7 @@
         </thead>
         <tbody>
             @foreach($forms as $form) <tr>
+                <td class="px-6 py-4 text-left">{{ $form->id }}</td>
                 <td class="px-6 py-4 text-left">{{ $form->first_name
                     }} {{ $form->second_name }} {{ $form->first_surname }}
                     {{ $form->second_surname }}</td>
