@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('phone', 10);
             $table->string('address');
             $table->foreignId('neighborhood_id')->constrained('neighborhoods');
+            $table->foreignId('section_id')->constrained('sections');
+            $table->boolean('vote');
             $table->timestamps();
         });
     }

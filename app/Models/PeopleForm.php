@@ -15,7 +15,9 @@ class PeopleForm extends Model
         'electoral_key',
         'phone',
         'address',
-        'neighborhood_id'
+        'neighborhood_id',
+        'section_id',
+        'vote'
     ];
 
     public function user()
@@ -26,5 +28,10 @@ class PeopleForm extends Model
     public function neighborhood()
     {
         return $this->belongsTo(Neighborhood::class);
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
     }
 }
