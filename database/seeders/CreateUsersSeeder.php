@@ -6,7 +6,8 @@ use Exception;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class CreateUsersSeeder extends Seeder
 {
@@ -16,6 +17,14 @@ class CreateUsersSeeder extends Seeder
     public function run(): void
     {
         $users = Storage::json('fill.json');
+
+        $output = new ConsoleOutput();
+        $progressBar = new ProgressBar($output, count($users));
+
+        // Mensaje de inicio
+        $output->writeln('<info>Comenzando la inserción de datos en la tabla Users...</info>');
+
+        $progressBar->start();
 
         foreach ($users as $user) {
             $email = $this->getUserEmail($user);
@@ -31,7 +40,13 @@ class CreateUsersSeeder extends Seeder
                 $new_user->assignRole($user['role']);
             } catch (Exception $err) {
             }
+            $progressBar->advance();
         }
+        $progressBar->finish();
+        $output->writeln('');
+
+        // Mensaje de finalización
+        $output->writeln('<info>¡La inserción de datos en la tabla Users ha finalizado!</info>');
     }
 
     private function getUserEmail(array $user): String
