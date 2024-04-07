@@ -54,7 +54,7 @@ class MainSubordinates extends Component
             $counter = PeopleForm::where('user_id', $subordinate->id)->count();
             array_push($data, ['name' => $subordinate->name, 'form_counter' => $counter]);
         }
-        
+
         $pdf = Pdf::loadView('pdf.all_capturers_counter', [
             'forms' => $data,
         ])->setPaper('letter');
@@ -72,25 +72,21 @@ class MainSubordinates extends Component
 
     public function downloadCapturerReport($id)
     {
-        $capturer_name = User::find($id)->name;
+        $capturer = User::find($id);
         $count_forms = PeopleForm::where('user_id', $id)->count();
         $forms = PeopleForm::where('user_id', $id)->get();
 
-        $pdf = Pdf::loadView('pdf.capturer_report', [
-            'capturer_name' => $capturer_name,
-            'count_forms' => $count_forms,
-            'forms' => $forms,
-        ])->setPaper('letter');
+        $pdf = Pdf::loadView('pdf.capturer_report', ['forms' => $forms])->setPaper('letter');
 
         $pdf->output();
         $domPdf = $pdf->getDomPDF();
 
         $canvas = $domPdf->get_canvas();
-        $canvas->page_text(10, 10, $capturer_name . ' - Total: ' . $count_forms . ' - Página {PAGE_NUM} de {PAGE_COUNT}', null, 10, [0, 0, 0]);
+        $canvas->page_text(10, 10, $capturer->name . ' - Total: ' . $count_forms . ' - Página {PAGE_NUM} de {PAGE_COUNT}', null, 10, [0, 0, 0]);
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'reporte_' . str_replace(' ', '_', strtolower($capturer_name)) . '.pdf');
+        }, 'reporte_' . str_replace(' ', '_', strtolower($capturer->name)) . '.pdf');
     }
 
     public function checkuserFromViewOrBoss($user_from_view): bool
