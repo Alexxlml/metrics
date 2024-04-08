@@ -51,6 +51,40 @@ class MainPeopleForms extends Component
         ]);
     }
 
+    public function changeVoteState($form_id, $vote_state)
+    {
+        $form = PeopleForm::find($form_id);
+        if ($form) {
+            try {
+                $new_state = $vote_state ? false : true;
+                $form->update(['vote' => $new_state]);
+                $form->save();
+
+                $this->alert('success', 'Cambio exitoso.', [
+                    'position' => 'center',
+                    'timer' => '1500',
+                    'toast' => false,
+                    'timerProgressBar' => true,
+                ]);
+            } catch (Exception $err) {
+                $this->alert('error', 'Ha ocurrido un error.', [
+                    'position' => 'center',
+                    'timer' => '4000',
+                    'toast' => false,
+                    'timerProgressBar' => true,
+                    'text' => 'Recargue la página e intente de nuevo.',
+                ]);
+            }
+        } else {
+            $this->alert('error', 'Este formulario ya no existe.', [
+                'position' => 'center',
+                'timer' => '4000',
+                'toast' => false,
+                'timerProgressBar' => true,
+            ]);
+        }
+    }
+
     public function deleteForm($form_id): void
     {
         $this->confirm('¿Deseas eliminar este formulario?', [
