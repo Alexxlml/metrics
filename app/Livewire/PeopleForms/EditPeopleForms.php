@@ -44,8 +44,6 @@ class EditPeopleForms extends Component
     #[Validate('required|numeric|min_digits:1|max_digits:2', as: 'sección')]
     public $selectedSection = '';
 
-    public $vote = false;
-
     public function mount($id)
     {
         $form = PeopleForm::find($id);
