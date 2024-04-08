@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Neighborhood;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CreateNeighborhoodsSeeder extends Seeder
 {
@@ -64,12 +66,27 @@ class CreateNeighborhoodsSeeder extends Seeder
             ],
         ];
 
+        $output = new ConsoleOutput();
+        $progressBar = new ProgressBar($output, count($neighborhoods));
+
+        // Mensaje de inicio
+        $output->writeln('<info>Comenzando la inserción de datos en la tabla Neighborhoods...</info>');
+
+        $progressBar->start();
+
         foreach ($neighborhoods as $neighborhood) {
             $new_neighborhood = Neighborhood::Create([
                 'name' => $neighborhood['name'],
                 'town_id' => $neighborhood['town_id']
             ]);
             $new_neighborhood->save();
+            $progressBar->advance();
         }
+
+        $progressBar->finish();
+        $output->writeln('');
+
+        // Mensaje de finalización
+        $output->writeln('<info>¡La inserción de datos en la tabla Neighborhoods ha finalizado!</info>');
     }
 }
