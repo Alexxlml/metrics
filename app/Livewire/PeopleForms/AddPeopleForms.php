@@ -3,6 +3,7 @@
 namespace App\Livewire\PeopleForms;
 
 use App\Models\Town;
+use App\Models\Section;
 use Livewire\Component;
 use App\Models\PeopleForm;
 use App\Models\Neighborhood;
@@ -34,10 +35,14 @@ class AddPeopleForms extends Component
     public $phone;
     #[Validate('required|string|max:255', as: 'dirección')]
     public $address;
-    #[Validate('required|string|min:1|max:2', as: 'poblado')]
+    #[Validate('required|numeric|min_digits:1|max_digits:2', as: 'poblado')]
     public $selectedTown = '';
-    #[Validate('required|string|min:1|max:2', as: 'colonia')]
+    #[Validate('required|numeric|min_digits:1|max_digits:2', as: 'colonia')]
     public $selectedNeighborhood = '';
+    #[Validate('required|numeric|min_digits:1|max_digits:2', as: 'sección')]
+    public $selectedSection = '';
+
+    public $vote = false;
 
     public function rules()
     {
@@ -64,6 +69,7 @@ class AddPeopleForms extends Component
             'towns' => Town::all(),
             'neighborhoods' => Neighborhood::where('town_id', 'like', $this->selectedTown)
                 ->get(),
+            'sections' => Section::all(),
         ]);
     }
 
@@ -90,6 +96,8 @@ class AddPeopleForms extends Component
             'phone' => $this->phone,
             'address' => $this->address,
             'neighborhood_id' => $this->selectedNeighborhood,
+            'section_id' => $this->selectedSection,
+            'vote' => $this->vote,
         ]);
 
         $this->reset();
