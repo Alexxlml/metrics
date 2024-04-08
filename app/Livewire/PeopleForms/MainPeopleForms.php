@@ -2,15 +2,16 @@
 
 namespace App\Livewire\PeopleForms;
 
-use App\Livewire\Forms\PeopleForms\IncidentsPeopleForms;
-use App\Models\Incident;
 use Exception;
+use Carbon\Carbon;
 use App\Models\User;
 use Livewire\Component;
+use App\Models\Incident;
 use App\Models\PeopleForm;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Livewire\Forms\PeopleForms\IncidentsPeopleForms;
 
 class MainPeopleForms extends Component
 {
@@ -25,6 +26,8 @@ class MainPeopleForms extends Component
     public IncidentsPeopleForms $incidentForm;
     public $formToChange;
     public $modalRequest = false;
+    public $showCheckVote = true;
+    public $authorizeChangeVote = false;
 
     public function mount($id)
     {
@@ -39,6 +42,18 @@ class MainPeopleForms extends Component
         } else {
             abort(404);
         }
+        // * Definir las fechas de inicio y fin del rango
+        $initRange = Carbon::create(2024, 6, 2, 7, 0, 0); // 02 de Junio del 2024 a las 7 AM
+        $endRange = Carbon::create(2024, 6, 2, 19, 0, 0);   // 02 de Junio del 2024 a las 7 PM
+        // * Obtener fecha y hora actual
+        $actualDate = Carbon::now();
+
+        // * Bloqueo de columna voto hasta que la fecha actual cumpla con las fechas y horas establecidas
+        $this->showCheckVote = ($actualDate->gte($initRange) && $actualDate->lte($endRange)) ?
+            true : false;
+
+        $this->authorizeChangeVote = ($this->userFromView == $this->loggedUser) ?
+            true : false;
     }
 
     public function render()
@@ -53,35 +68,37 @@ class MainPeopleForms extends Component
 
     public function changeVoteState($form_id, $vote_state)
     {
-        $form = PeopleForm::find($form_id);
-        if ($form) {
-            try {
-                $new_state = $vote_state ? false : true;
-                $form->update(['vote' => $new_state]);
-                $form->save();
+        if ($this->showCheckVote && $this->authorizeChangeVote) {
+            $form = PeopleForm::find($form_id);
+            if ($form) {
+                try {
+                    $new_state = $vote_state ? false : true;
+                    $form->update(['vote' => $new_state]);
+                    $form->save();
 
-                $this->alert('success', 'Cambio exitoso.', [
-                    'position' => 'center',
-                    'timer' => '1500',
-                    'toast' => false,
-                    'timerProgressBar' => true,
-                ]);
-            } catch (Exception $err) {
-                $this->alert('error', 'Ha ocurrido un error.', [
+                    $this->alert('success', 'Cambio exitoso.', [
+                        'position' => 'center',
+                        'timer' => '1500',
+                        'toast' => false,
+                        'timerProgressBar' => true,
+                    ]);
+                } catch (Exception $err) {
+                    $this->alert('error', 'Ha ocurrido un error.', [
+                        'position' => 'center',
+                        'timer' => '4000',
+                        'toast' => false,
+                        'timerProgressBar' => true,
+                        'text' => 'Recargue la página e intente de nuevo.',
+                    ]);
+                }
+            } else {
+                $this->alert('error', 'Este formulario ya no existe.', [
                     'position' => 'center',
                     'timer' => '4000',
                     'toast' => false,
                     'timerProgressBar' => true,
-                    'text' => 'Recargue la página e intente de nuevo.',
                 ]);
             }
-        } else {
-            $this->alert('error', 'Este formulario ya no existe.', [
-                'position' => 'center',
-                'timer' => '4000',
-                'toast' => false,
-                'timerProgressBar' => true,
-            ]);
         }
     }
 
