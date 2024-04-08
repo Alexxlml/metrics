@@ -41,9 +41,11 @@
                                 <th scope="col" class="px-6 py-3">
                                     Nombre
                                 </th>
+                                @if($showCheckVote && $authorizeChangeVote)
                                 <th scope="col" class="px-6 py-3">
                                     Voto
                                 </th>
+                                @endif
                                 <th scope="col" class="px-6 py-3 text-center">
                                     Teléfono
                                 </th>
@@ -62,14 +64,18 @@
                                 <td class="px-6 py-4">
                                     {{ $form->first_name }} {{ $form->first_surname }}
                                 </td>
+                                @if($showCheckVote && $authorizeChangeVote)
                                 <td class="px-6 py-4">
                                     <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" class="sr-only peer" wire:click="changeVoteState({{ $form->id }}, {{ $form->vote }})" @if($form->vote) checked @endif>
+                                        <input type="checkbox" class="sr-only peer"
+                                            wire:click="changeVoteState({{ $form->id }}, {{ $form->vote }})"
+                                            @if($form->vote) checked @endif>
                                         <div
                                             class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                                         </div>
                                     </label>
                                 </td>
+                                @endif
                                 <td class="px-6 py-4">
                                     <a href="tel:{{ $form->phone }}"
                                         class="flex justify-center text-green-600 hover:text-green-700 dark:text-green-500 hover:dark:text-green-600"><svg
