@@ -149,6 +149,7 @@
                 <option value="Teléfono">Teléfono</option>
                 <option value="Poblado">Poblado</option>
                 <option value="Colonia">Colonia</option>
+                <option value="Sección">Sección</option>
             </select>
             <x-input-error for="incidentForm.fieldToChange" class="mt-2" />
             <x-label for="description" class="mt-4">{{ __('Descripción del cambio') }}</x-label>
