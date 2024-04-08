@@ -65,6 +65,17 @@
                     </select>
                     <x-input-error for="selectedNeighborhood" class="mt-2" />
                 </div>
+                <div class="col-span-6 sm:col-span-6">
+                    <x-label for="section_id">{{ __('Sección') }}</x-label>
+                    <select id="section_id" wire:model.blur="selectedSection"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Selecciona</option>
+                        @foreach($sections as $section)
+                        <option value="{{ $section->id }}">{{ $section->number }} - {{ $section->name }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="selectedSection" class="mt-2" />
+                </div>
             </x-slot>
             <x-slot name="actions">
                 <x-secondary-button class="mr-2" wire:click="redirectToPanel">{{ __('Regresar al panel')}}</x-secondary-button>
