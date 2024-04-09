@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware([
@@ -31,14 +31,15 @@ Route::middleware([
     })->name('dashboard');
 
     // ! Hierarchies
-    Route::get('/admin/panel-jerarquias', function () {
-        return view('hierarchies.main-hierarchies');
-    })->name('panel-jerarquias');
+    Route::group(['middleware' => ['role:Super Administrator']], function () {
+        Route::get('/admin/panel-jerarquias', function () {
+            return view('hierarchies.main-hierarchies');
+        })->name('panel-jerarquias');
 
-    Route::get('/admin/agregar-jerarquia', function () {
-        return view('hierarchies.add-hierarchy');
-    })->name('agregar-jerarquia');
-
+        Route::get('/admin/agregar-jerarquia', function () {
+            return view('hierarchies.add-hierarchy');
+        })->name('agregar-jerarquia');
+    });
     // ! Forms
     Route::get('/formularios/panel/{id}', MainPeopleForms::class)
         ->name('panel-formularios');
@@ -51,10 +52,13 @@ Route::middleware([
         ->name('editar-formulario');
 
     // ! Incidents
-    Route::get('/incidentes/panel/{id}', MainIncidents::class)
-        ->name('panel-incidentes');
-
+    Route::group(['middleware' => ['role:Super Administrator|Administrator|Supervisor|Capture Analyst']], function () {
+        Route::get('/incidentes/panel/{id}', MainIncidents::class)
+            ->name('panel-incidentes');
+    });
     // ! Subordinates
-    Route::get('/subordinados/panel/{id}', MainSubordinates::class)
-        ->name('panel-subordinados');
+    Route::group(['middleware' => ['role:Super Administrator|Administrator|Supervisor|Capture Analyst']], function () {
+        Route::get('/subordinados/panel/{id}', MainSubordinates::class)
+            ->name('panel-subordinados');
+    });
 });
