@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="flex flex-col p-4 mb-4">
                     <h1 class="dark:text-gray-200 text-2xl">{{ $ownerUserName }}</h1>
-                    <p class="dark:text-gray-200 text-md">Usa el enlace <span class="font-bold">"Editar"</span> para ir
+                    <p class="dark:text-gray-200 text-md mt-3">Usa el enlace <span class="font-bold">"Editar"</span> para ir
                         al formulario y realizar la corrección.<br>
                         <span class="font-bold">"Cambia el estado"</span> de la incidencia si la corrección fue
                         realizada o rechazada.
@@ -38,11 +38,8 @@
                                 <th scope="col" class="px-6 py-3">
                                     Estado
                                 </th>
-                                <th scope="col" class="px-6 py-3">
-                                    <span class="sr-only">Editar Formulario</span>
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    <span class="sr-only">Cambiar estado</span>
+                                <th scope="col" colspan="2" class="px-6 py-3 text-center">
+                                    Acciones
                                 </th>
                             </tr>
                         </thead>
@@ -87,12 +84,26 @@
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <a href="{{ route('editar-formulario', ['id' => $incident->form_id]) }}"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                                        class="flex justify-center text-blue-600 hover:text-blue-700 dark:text-blue-500 hover:dark:text-blue-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            class="w-6 h-6">
+                                            <path fill-rule="evenodd"
+                                                d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z"
+                                                clip-rule="evenodd" />
+                                            <path
+                                                d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                                        </svg>
+                                    </a>
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <button type="button" wire:click="openModalToChange({{ $incident->id }})"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Cambiar
-                                        estado</button>
+                                        class="flex justify-center text-yellow-600 hover:text-yellow-700 dark:text-yellow-500 hover:dark:text-yellow-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                        </svg>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
