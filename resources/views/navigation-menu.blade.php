@@ -80,7 +80,7 @@ $logged_user = auth()->user()->id;
                 <div class="hidden sm:flex sm:items-center sm:ms-10">
                     <x-dropdown align="right">
                         <x-slot name="trigger">
-                            <button type="button" class="@if(request()->routeIs('agregar-jerarquia') || request()->routeIs('panel-jerarquias'))
+                            <button type="button" class="@if(request()->routeIs('agregar-formulario') || request()->routeIs('panel-formularios'))
                                 {{ $active_classes['active'] }}@else{{ $active_classes['inactive'] }}@endif">
                                 {{ __('Formularios') }}
                             </button>
