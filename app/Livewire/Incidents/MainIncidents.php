@@ -28,7 +28,7 @@ class MainIncidents extends Component
 
     public function mount($id)
     {
-        $this->userFromView = $id;
+        $this->userFromView = intval($id);
         $this->ownerUserName = User::find($id)->name;
         $this->loggedUser = Auth::user()->id;
 
