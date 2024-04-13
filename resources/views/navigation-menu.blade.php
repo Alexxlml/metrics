@@ -42,6 +42,16 @@ $logged_user = auth()->user()->id;
 
                         <x-slot name="content">
                             <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Usuarios') }}
+                            </div>
+                            <x-dropdown-link href="{{  route('agregar-usuario') }}">
+                                {{ __('Agregar') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{  route('panel-usuarios') }}">
+                                {{ __('Panel') }}
+                            </x-dropdown-link>
+                            <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                            <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Jerarquías') }}
                             </div>
                             <x-dropdown-link href="{{  route('agregar-jerarquia') }}">
@@ -241,11 +251,27 @@ $logged_user = auth()->user()->id;
             <div class="flex items-center px-4">
                 <div>
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">Super Administrator</div>
-                    <div class="font-medium text-sm text-gray-500">Jerarquías</div>
                 </div>
             </div>
 
             <div class="mt-3 space-y-1">
+                <div class="flex items-center px-4">
+                    <div class="font-medium text-sm text-gray-500">Usuarios</div>
+                </div>
+                <x-responsive-nav-link href="{{ route('agregar-usuario') }}"
+                    :active="request()->routeIs('agregar-usuario')">
+                    {{ __('Agregar') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('panel-usuarios') }}"
+                    :active="request()->routeIs('panel-usuarios')">
+                    {{ __('Panel') }}
+                </x-responsive-nav-link>
+            </div>
+
+            <div class="mt-3 space-y-1">
+                <div class="flex items-center px-4">
+                    <div class="font-medium text-sm text-gray-500">Jerarquías</div>
+                </div>
                 <x-responsive-nav-link href="{{ route('agregar-jerarquia') }}"
                     :active="request()->routeIs('agregar-jerarquia')">
                     {{ __('Agregar') }}
