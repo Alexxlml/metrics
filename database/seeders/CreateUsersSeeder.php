@@ -61,7 +61,7 @@ class CreateUsersSeeder extends Seeder
             . strtolower($user['first_name'][1])
             . strtolower($user['first_surname'])
             . substr($user['phone'], -2)
-            . '@metrics.test';
+            . '@metrics.com';
     }
 
     private function getUserPassword(array $user): String
