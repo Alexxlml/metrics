@@ -5,7 +5,7 @@
                 {{ __('Información personal') }}
             </x-slot>
             <x-slot name="description">
-                {{ __('Rellena el formulario con los datos solicitados.') }}
+                {{ __('Rellena el registro con los datos solicitados.') }}
             </x-slot>
             <x-slot name="form">
                 <div class="col-span-6 sm:col-span-3">

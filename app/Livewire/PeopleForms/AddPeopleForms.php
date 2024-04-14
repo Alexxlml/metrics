@@ -20,7 +20,7 @@ class AddPeopleForms extends Component
         'confirmed'
     ];
 
-    // * Variables del formulario
+    // * Variables del registro
     #[Validate('required|regex:/^[\pL\pM\s]+$/u|max:255', as: 'primer nombre')]
     public $firstName;
     #[Validate('nullable|regex:/^[\pL\pM\s]+$/u|max:255', as: 'segundo nombre')]
@@ -56,7 +56,7 @@ class AddPeopleForms extends Component
         ];
     }
 
-    // * Usuario que crea un formulario
+    // * Usuario que crea un registro
     public $userId;
     public function mount()
     {
@@ -75,7 +75,7 @@ class AddPeopleForms extends Component
 
     public function save(): void
     {
-        $this->confirm('¿Deseas guardar este formulario?', [
+        $this->confirm('¿Deseas guardar este registro?', [
             'confirmButtonText' => 'Si',
             'onConfirmed' => 'confirmed',
             'allowOutsideClick' => false,
@@ -102,7 +102,7 @@ class AddPeopleForms extends Component
 
         $this->reset();
 
-        $this->alert('success', 'Formulario agregado', [
+        $this->alert('success', 'Registro agregado', [
             'position' => 'center',
             'timer' => '3000',
             'toast' => false,
@@ -113,7 +113,7 @@ class AddPeopleForms extends Component
     public function redirectToPanel()
     {
         $this->getCurrentUserId();
-        return redirect()->route('panel-formularios', ['id' => strval($this->userId)]);
+        return redirect()->route('panel-registros', ['id' => strval($this->userId)]);
     }
 
     public function updatedSelectedTown(): void

@@ -116,7 +116,7 @@ class MainPeopleForms extends Component
                     ]);
                 }
             } else {
-                $this->alert('error', 'Este formulario ya no existe.', [
+                $this->alert('error', 'Este registro ya no existe.', [
                     'position' => 'center',
                     'timer' => '4000',
                     'toast' => false,
@@ -128,7 +128,7 @@ class MainPeopleForms extends Component
 
     public function deleteForm($form_id): void
     {
-        $this->confirm('¿Deseas eliminar este formulario?', [
+        $this->confirm('¿Deseas eliminar este registro?', [
             'confirmButtonText' => 'Si',
             'onConfirmed' => 'confirmed',
             'inputAttributes' => $form_id,

@@ -23,7 +23,7 @@ class EditPeopleForms extends Component
 
     public $formId, $ownerUserId, $loggedUser, $originalUser;
 
-    // * Variables del formulario
+    // * Variables del registro
     #[Validate('required|regex:/^[\pL\pM\s]+$/u|max:255', as: 'primer nombre')]
     public $firstName;
     #[Validate('nullable|regex:/^[\pL\pM\s]+$/u|max:255', as: 'segundo nombre')]
@@ -70,7 +70,7 @@ class EditPeopleForms extends Component
 
     public function save(): void
     {
-        $this->confirm('¿Deseas actualizar este formulario?', [
+        $this->confirm('¿Deseas actualizar este registro?', [
             'confirmButtonText' => 'Si',
             'onConfirmed' => 'confirmed',
             'allowOutsideClick' => false,
@@ -85,7 +85,7 @@ class EditPeopleForms extends Component
 
     public function redirectToPanel()
     {
-        return redirect()->route('panel-formularios', ['id' => strval($this->ownerUserId)]);
+        return redirect()->route('panel-registros', ['id' => strval($this->ownerUserId)]);
     }
 
     public function updatedSelectedTown(): void
@@ -126,14 +126,14 @@ class EditPeopleForms extends Component
             ]);
             $form->save();
 
-            $this->alert('success', 'Formulario actualizado', [
+            $this->alert('success', 'Registro actualizado', [
                 'position' => 'center',
                 'timer' => '3000',
                 'toast' => false,
                 'timerProgressBar' => true,
             ]);
         } else {
-            $this->alert('error', 'Este formulario fue eliminado.', [
+            $this->alert('error', 'Este registro fue eliminado.', [
                 'position' => 'center',
                 'timer' => '6000',
                 'toast' => false,

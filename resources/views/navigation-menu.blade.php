@@ -90,17 +90,17 @@ $logged_user = auth()->user()->id;
                 <div class="hidden sm:flex sm:items-center sm:ms-10">
                     <x-dropdown align="right">
                         <x-slot name="trigger">
-                            <button type="button" class="@if(request()->routeIs('agregar-formulario') || request()->routeIs('panel-formularios'))
+                            <button type="button" class="@if(request()->routeIs('agregar-registro') || request()->routeIs('panel-registros'))
                                 {{ $active_classes['active'] }}@else{{ $active_classes['inactive'] }}@endif">
-                                {{ __('Formularios') }}
+                                {{ __('Registros') }}
                             </button>
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link href="{{  route('agregar-formulario') }}">
+                            <x-dropdown-link href="{{  route('agregar-registro') }}">
                                 {{ __('Agregar') }}
                             </x-dropdown-link>
-                            <x-dropdown-link href="{{  route('panel-formularios', $logged_user) }}">
+                            <x-dropdown-link href="{{  route('panel-registros', $logged_user) }}">
                                 {{ __('Panel') }}
                             </x-dropdown-link>
                         </x-slot>
@@ -319,17 +319,17 @@ $logged_user = auth()->user()->id;
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="flex items-center px-4">
                 <div>
-                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">Formularios</div>
+                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">registros</div>
                 </div>
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link href="{{ route('agregar-formulario') }}"
-                    :active="request()->routeIs('agregar-formulario')">
+                <x-responsive-nav-link href="{{ route('agregar-registro') }}"
+                    :active="request()->routeIs('agregar-registro')">
                     {{ __('Agregar') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link href="{{ route('panel-formularios', $logged_user) }}"
-                    :active="request()->routeIs('panel-formularios')">
+                <x-responsive-nav-link href="{{ route('panel-registros', $logged_user) }}"
+                    :active="request()->routeIs('panel-registros')">
                     {{ __('Panel') }}
                 </x-responsive-nav-link>
             </div>

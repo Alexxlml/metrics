@@ -52,15 +52,15 @@ Route::middleware([
         })->name('agregar-usuario');
     });
     // ! Forms
-    Route::get('/formularios/panel/{id}', MainPeopleForms::class)
-        ->name('panel-formularios');
+    Route::get('/registros/panel/{id}', MainPeopleForms::class)
+        ->name('panel-registros');
 
-    Route::get('/formularios/agregar-formulario', function () {
+    Route::get('/registros/agregar-registro', function () {
         return view('people-forms.add-people-forms');
-    })->name('agregar-formulario');
+    })->name('agregar-registro');
 
-    Route::get('/formularios/formulario/{id}', EditPeopleForms::class)
-        ->name('editar-formulario');
+    Route::get('/registros/registro/{id}', EditPeopleForms::class)
+        ->name('editar-registro');
 
     // ! Incidents
     Route::group(['middleware' => ['role:Super Administrator|Administrator|Supervisor|Capture Analyst']], function () {

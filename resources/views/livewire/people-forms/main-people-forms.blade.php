@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Panel de Formularios') }}
+            {{ __('Panel de Registros') }}
         </h2>
     </x-slot>
 
@@ -22,7 +22,7 @@
                     @can('forms create')
                     <div
                         class="grid col-span-4 md:col-span-2 xl:col-span-1 row-span-1 justify-items-start md:justify-items-end">
-                        <a href="{{ route('agregar-formulario') }}"
+                        <a href="{{ route('agregar-registro') }}"
                             class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                             Agregar
                         </a>
@@ -155,7 +155,7 @@
                                 </td>
                                 @unlessrole('Data Capturer')
                                 <td class="py-4">
-                                    <a href="{{ route('editar-formulario', ['id' => $form->id]) }}"
+                                    <a href="{{ route('editar-registro', ['id' => $form->id]) }}"
                                         class="flex justify-center text-yellow-600 hover:text-yellow-700 dark:text-yellow-500 hover:dark:text-yellow-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -177,7 +177,7 @@
                                     </a>
                                 </td>
                                 <td class="py-4">
-                                    <a href="{{ route('editar-formulario', ['id' => $form->id]) }}"
+                                    <a href="{{ route('editar-registro', ['id' => $form->id]) }}"
                                         class="flex justify-center text-blue-600 hover:text-blue-700 dark:text-blue-500 hover:dark:text-blue-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

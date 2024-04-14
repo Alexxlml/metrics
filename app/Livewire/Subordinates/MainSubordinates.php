@@ -86,7 +86,7 @@ class MainSubordinates extends Component
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'reporte_formularios_capturistas.pdf');
+        }, 'reporte_registros_capturistas.pdf');
     }
 
     public function downloadCapturerReport($id)

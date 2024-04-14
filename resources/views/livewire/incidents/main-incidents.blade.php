@@ -11,7 +11,7 @@
                 <div class="flex flex-col p-4 mb-4">
                     <h1 class="dark:text-gray-200 text-2xl">{{ $ownerUserName }}</h1>
                     <p class="dark:text-gray-200 text-md mt-3">Usa el enlace <span class="font-bold">"Editar"</span> para ir
-                        al formulario y realizar la corrección.<br>
+                        al registro y realizar la corrección.<br>
                         <span class="font-bold">"Cambia el estado"</span> de la incidencia si la corrección fue
                         realizada o rechazada.
                     </p>
@@ -24,7 +24,7 @@
                                     ID
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    ID Formulario
+                                    ID Registro
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Subordinado
@@ -83,7 +83,7 @@
                                             </span>
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('editar-formulario', ['id' => $incident->form_id]) }}"
+                                    <a href="{{ route('editar-registro', ['id' => $incident->form_id]) }}"
                                         class="flex justify-center text-blue-600 hover:text-blue-700 dark:text-blue-500 hover:dark:text-blue-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                             class="w-6 h-6">
