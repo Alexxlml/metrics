@@ -14,7 +14,11 @@ class MainSubordinates extends Component
 {
     use WithPagination;
 
-    protected $perPage = 10;
+    // * Variables barra de búsqueda
+    public $search = "";
+    public $perPage = 5;
+    public $sortBy = 'id';
+    public $sortAsc = true;
 
     public $userFromView, $roleUserFromView, $ownerUserName, $loggedUser;
 
@@ -39,8 +43,23 @@ class MainSubordinates extends Component
         return view('livewire.subordinates.main-subordinates', [
             'subordinates' => User::whereHas('boss', function ($query) {
                 $query->where('boss_id', $this->userFromView);
-            })->paginate($this->perPage),
+            })->where(function ($query) {
+                $query->where('name', 'LIKE', "%{$this->search}%");
+            })->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
+                ->paginate($this->perPage),
         ]);
+    }
+
+    public function changeSortBy($sortBy)
+    {
+        $this->sortBy = $sortBy;
+        $this->sortAsc = true;
+    }
+
+    public function changeSortAsc($sortBy)
+    {
+        $this->sortBy = $sortBy;
+        $this->sortAsc = !$this->sortAsc;
     }
 
     public function downloadCapturerPerAnalystListReport($id)
