@@ -18,10 +18,16 @@ class MainPeopleForms extends Component
     use WithPagination;
     use LivewireAlert;
 
-    protected $perPage = 10;
     protected $listeners = [
         'confirmed'
     ];
+
+    // * Variables barra de búsqueda
+    public $search = "";
+    public $perPage = 5;
+    public $sortBy = 'id';
+    public $sortAsc = true;
+
     public $userFromView, $loggedUser, $ownerUserName;
     public IncidentsPeopleForms $incidentForm;
     public $formToChange;
@@ -61,9 +67,27 @@ class MainPeopleForms extends Component
         return view('livewire.people-forms.main-people-forms', [
             'forms' => PeopleForm::with('neighborhood.town')
                 ->where('user_id', $this->userFromView)
+                ->where('id', 'LIKE', "%{$this->search}%")
+                ->orWhere('first_name', 'LIKE', "%{$this->search}%")
+                ->orWhere('second_name', 'LIKE', "%{$this->search}%")
+                ->orWhere('first_surname', 'LIKE', "%{$this->search}%")
+                ->orWhere('second_surname', 'LIKE', "%{$this->search}%")
+                ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                 ->paginate($this->perPage),
             'count_forms' => PeopleForm::where('user_id', $this->userFromView)->count(),
         ]);
+    }
+
+    public function changeSortBy($sortBy)
+    {
+        $this->sortBy = $sortBy;
+        $this->sortAsc = true;
+    }
+
+    public function changeSortAsc($sortBy)
+    {
+        $this->sortBy = $sortBy;
+        $this->sortAsc = !$this->sortAsc;
     }
 
     public function changeVoteState($form_id, $vote_state)

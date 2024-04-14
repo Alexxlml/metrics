@@ -93,7 +93,7 @@
                         <div class="flex space-x-2">
                             <button type="button" wire:click="changeSortBy('name')"
                                 class="hover:text-gray-400 hover:dark:text-gray-200 hover:scale-125 hover:transition-all">
-                                Nombre
+                                NOMBRE
                             </button>
                             <button type="button" wire:click="changeSortAsc('name')"
                                 class="hover:text-gray-400 hover:dark:text-gray-200 hover:scale-150 hover:transition-all">
