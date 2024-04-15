@@ -11,7 +11,7 @@
                 <div class="p-4">
                     <h3 class="dark:text-gray-200 text-sm sm:text-xl md:text-2xl">{{ $total_votes }} votos de {{ $total_registers }} registros</h3>
                 </div>
-                <canvas id="myChart"></canvas>
+                <canvas id="perHourChart"></canvas>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
 
 @script
 <script>
-    const ctx = document.getElementById('myChart');
+    const ctx = document.getElementById('perHourChart');
     const votes = $wire.votes;
     const labels = votes.map(item=>item.hora);
     const values = votes.map(item=>item.total);
