@@ -101,6 +101,7 @@ class AddPeopleForms extends Component
         ]);
 
         $this->reset();
+        $this->getCurrentUserId();
 
         $this->alert('success', 'Registro agregado', [
             'position' => 'center',
