@@ -16,18 +16,25 @@ class CreateTownsSeeder extends Seeder
     public function run(): void
     {
         $towns = [
-            ['name' => 'ASENTAMIENTOS'],
-            ['name' => 'BARRIOS DE JOJUTLA CENTRO'],
-            ['name' => 'CHISCO'],
-            ['name' => 'HIGUERON'],
-            ['name' => 'JICARERO'],
-            ['name' => 'JOJUTLA CENTRO'],
-            ['name' => 'LAZARO CARDENAS'],
-            ['name' => 'PANCHIMALCO'],
-            ['name' => 'PEDRO AMARO'],
-            ['name' => 'TEHUIXTLA '],
-            ['name' => 'TEQUESQUITENGO'],
-            ['name' => 'TLATENCHI'],
+            ["name" => "ALTAVISTA"],
+            ["name" => "CHISCO"],
+            ["name" => "CONSTITUCION DEL 57"],
+            ["name" => "HIGUERON"],
+            ["name" => "INDEPENDENCIA"],
+            ["name" => "JICARERO"],
+            ["name" => "JOJUTLA CENTRO"],
+            ["name" => "LAZARO CARDENAS"],
+            ["name" => "LOS PILARES"],
+            ["name" => "NICOLAS BRAVO"],
+            ["name" => "OTRA COLONIA"],
+            ["name" => "PANCHIMALCO"],
+            ["name" => "PEDRO AMARO"],
+            ["name" => "RIO SECO"],
+            ["name" => "TEHUIXTLA "],
+            ["name" => "TEQUESQUITENGO"],
+            ["name" => "TLATENCHI"],
+            ["name" => "U. HAB. JOSE MA. MORELOS Y PAVON"],
+            ["name" => "VICENTE ARANDA (SAN RAFAEL)"],
         ];
 
         $output = new ConsoleOutput();
