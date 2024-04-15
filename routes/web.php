@@ -2,6 +2,7 @@
 
 use App\Livewire\Users\EditUsers;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Reports\ChartPerHour;
 use App\Livewire\Incidents\MainIncidents;
 use App\Livewire\PeopleForms\EditPeopleForms;
 use App\Livewire\PeopleForms\MainPeopleForms;
@@ -71,5 +72,11 @@ Route::middleware([
     Route::group(['middleware' => ['role:Super Administrator|Administrator|Supervisor|Capture Analyst']], function () {
         Route::get('/subordinados/panel/{id}', MainSubordinates::class)
             ->name('panel-subordinados');
+    });
+
+    // ! Reports
+    Route::group(['middleware' => ['role:Super Administrator|Administrator|Supervisor']], function () {
+        Route::get('/reportes/reporte-por-hora', ChartPerHour::class)
+            ->name('reporte-por-hora');
     });
 });
