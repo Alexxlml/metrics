@@ -30,7 +30,7 @@ $logged_user = auth()->user()->id;
                 </div>
 
                 <!-- Super Administrator -->
-                @hasrole('Super Administrator'))
+                @hasrole('Super Administrator')
                 <div class="hidden sm:flex sm:items-center sm:ms-10">
                     <x-dropdown align="right">
                         <x-slot name="trigger">
