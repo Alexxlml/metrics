@@ -30,7 +30,7 @@ $logged_user = auth()->user()->id;
                 </div>
 
                 <!-- Super Administrator -->
-                @hasrole('Super Administrator'))
+                @hasrole('Super Administrator')
                 <div class="hidden sm:flex sm:items-center sm:ms-10">
                     <x-dropdown align="right">
                         <x-slot name="trigger">
@@ -65,6 +65,32 @@ $logged_user = auth()->user()->id;
                     </x-dropdown>
                 </div>
                 @endhasrole
+
+                @hasanyrole('Super Administrator|Administrator|Supervisor')
+                <div class="hidden sm:flex sm:items-center sm:ms-10">
+                    <x-dropdown align="right">
+                        <x-slot name="trigger">
+                            <button type="button" class="@if(request()->routeIs('agregar-jerarquia') || request()->routeIs('panel-jerarquias'))
+                                {{ $active_classes['active'] }}@else{{ $active_classes['inactive'] }}@endif">
+                                {{ __('Reportes') }}
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <x-dropdown-link href="{{  route('reporte-por-hora') }}">
+                                {{ __('V. Hora') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{  route('reporte-por-votos') }}">
+                                {{ __('V. Totales') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{  route('reporte-por-seccion') }}">
+                                {{ __('V. Sección') }}
+                            </x-dropdown-link>
+                            <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
+                @endhasanyrole
 
                 <!-- All Roles except Data Capturer -->
                 @unlessrole('Data Capturer')
@@ -283,6 +309,32 @@ $logged_user = auth()->user()->id;
             </div>
         </div>
         @endhasrole
+
+        @hasanyrole('Super Administrator|Administrator|Supervisor')
+        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+            <div class="flex items-center px-4">
+                <div>
+                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">Reportes</div>
+                </div>
+            </div>
+
+            <div class="mt-3 space-y-1">
+                <x-responsive-nav-link href="{{ route('reporte-por-hora') }}"
+                    :active="request()->routeIs('reporte-por-hora')">
+                    {{ __('V. Hora') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('reporte-por-votos') }}"
+                    :active="request()->routeIs('reporte-por-votos')">
+                    {{ __('V. Totales') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('reporte-por-seccion') }}"
+                    :active="request()->routeIs('reporte-por-seccion')">
+                    {{ __('V. Sección') }}
+                </x-responsive-nav-link>
+            </div>
+        </div>
+        @endhasanyrole
+
         @unlessrole('Data Capturer')
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="flex items-center px-4">
@@ -319,7 +371,7 @@ $logged_user = auth()->user()->id;
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="flex items-center px-4">
                 <div>
-                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">registros</div>
+                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">Registros</div>
                 </div>
             </div>
 
