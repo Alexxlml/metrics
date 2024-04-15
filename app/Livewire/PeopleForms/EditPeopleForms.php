@@ -39,7 +39,7 @@ class EditPeopleForms extends Component
     public $address;
     #[Validate('required|numeric|min_digits:1|max_digits:2', as: 'poblado')]
     public $selectedTown = '';
-    #[Validate('required|numeric|min_digits:1|max_digits:2', as: 'colonia')]
+    #[Validate('required|numeric|min_digits:1|max_digits:3', as: 'colonia')]
     public $selectedNeighborhood = '';
     #[Validate('required|numeric|min_digits:1|max_digits:2', as: 'sección')]
     public $selectedSection = '';
