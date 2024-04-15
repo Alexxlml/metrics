@@ -3,7 +3,9 @@
 use App\Livewire\Users\EditUsers;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Reports\ChartPerHour;
+use App\Livewire\Reports\ChartPerVotes;
 use App\Livewire\Incidents\MainIncidents;
+use App\Livewire\Reports\ChartPerSection;
 use App\Livewire\PeopleForms\EditPeopleForms;
 use App\Livewire\PeopleForms\MainPeopleForms;
 use App\Livewire\Subordinates\MainSubordinates;
@@ -78,5 +80,11 @@ Route::middleware([
     Route::group(['middleware' => ['role:Super Administrator|Administrator|Supervisor']], function () {
         Route::get('/reportes/reporte-por-hora', ChartPerHour::class)
             ->name('reporte-por-hora');
+
+        Route::get('/reportes/reporte-por-votos', ChartPerVotes::class)
+            ->name('reporte-por-votos');
+
+        Route::get('/reportes/reporte-por-seccion', ChartPerSection::class)
+            ->name('reporte-por-seccion');
     });
 });
