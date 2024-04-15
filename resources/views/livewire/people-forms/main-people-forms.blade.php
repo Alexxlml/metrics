@@ -106,7 +106,21 @@
                                 </th>
                                 @if($showCheckVote && $authorizeChangeVote)
                                 <th scope="col" class="px-6 py-3">
-                                    Voto
+                                    <div class="flex space-x-2">
+                                        <button type="button" wire:click="changeSortBy('vote')"
+                                            class="hover:text-gray-400 hover:dark:text-gray-200 hover:scale-125 hover:transition-all">
+                                            VOTO
+                                        </button>
+                                        <button type="button" wire:click="changeSortAsc('vote')"
+                                            class="hover:text-gray-400 hover:dark:text-gray-200 hover:scale-150 hover:transition-all">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                                class="w-4 h-4">
+                                                <path fill-rule="evenodd"
+                                                    d="M13.78 10.47a.75.75 0 0 1 0 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 1 1 1.06-1.06l.97.97V5.75a.75.75 0 0 1 1.5 0v5.69l.97-.97a.75.75 0 0 1 1.06 0ZM2.22 5.53a.75.75 0 0 1 0-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1-1.06 1.06l-.97-.97v5.69a.75.75 0 0 1-1.5 0V4.56l-.97.97a.75.75 0 0 1-1.06 0Z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </th>
                                 @endif
                                 <th scope="col" class="px-6 py-3 text-center">
