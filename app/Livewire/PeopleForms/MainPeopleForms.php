@@ -75,6 +75,7 @@ class MainPeopleForms extends Component
                 ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                 ->paginate($this->perPage),
             'count_forms' => PeopleForm::where('user_id', $this->userFromView)->count(),
+            'hasBoss' => $this->getBossId($this->userFromView),
         ]);
     }
 
@@ -177,7 +178,12 @@ class MainPeopleForms extends Component
 
     public function getBossId()
     {
-        return User::find($this->userFromView)->boss->boss_id;
+        $boss_id = null;
+        try {
+            $boss_id = User::find($this->userFromView)->boss->boss_id;
+        } catch (Exception) {
+        }
+        return $boss_id;
     }
 
     public function resetModalState()

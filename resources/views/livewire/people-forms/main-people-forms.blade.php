@@ -180,6 +180,7 @@
                                 </td>
                                 @endunlessrole
                                 @hasrole('Data Capturer')
+                                @if($hasBoss)
                                 <td class="py-4">
                                     <a role="button" tabindex="0" wire:click="openModalToChange({{ $form->id }})"
                                         class="flex justify-center text-yellow-600 hover:text-yellow-700 dark:text-yellow-500 hover:dark:text-yellow-600">
@@ -190,6 +191,7 @@
                                         </svg>
                                     </a>
                                 </td>
+                                @endif
                                 <td class="py-4">
                                     <a href="{{ route('editar-registro', ['id' => $form->id]) }}"
                                         class="flex justify-center text-blue-600 hover:text-blue-700 dark:text-blue-500 hover:dark:text-blue-600">
