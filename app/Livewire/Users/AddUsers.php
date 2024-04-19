@@ -51,6 +51,7 @@ class AddUsers extends Component
     public function confirmed()
     {
         $this->validate();
+        $this->trimVariables();
         $this->generateEmail($this->firstName, $this->firstSurName, $this->phone);
 
         $search = User::where('email', $this->email)->first();
@@ -91,6 +92,15 @@ class AddUsers extends Component
                 'text' => 'Este usuario ya existe.',
             ]);
         }
+    }
+
+    public function trimVariables(): void
+    {
+        $this->firstName = trim($this->firstName);
+        $this->secondName = trim($this->secondName);
+        $this->firstSurName = trim($this->firstSurName);
+        $this->secondSurName = trim($this->secondSurName);
+        $this->phone = trim($this->phone);
     }
 
     public function generateEmail($firstName, $firstSurName, $phone)
