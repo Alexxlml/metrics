@@ -187,7 +187,7 @@
         </x-slot>
         <x-slot name="content">
             <x-label for="password">{{ __('Nueva contraseña') }}</x-label>
-            <x-input id="password" class="block mt-1 w-full" type="password" wire:model.live="password"
+            <x-input id="password" class="block mt-1 w-full" type="password" wire:model.blur="password"
                 wire:loading.attr="disabled" wire:loading.class="opacity-50" />
             <x-input-error for="password" class="mt-2" />
         </x-slot>
