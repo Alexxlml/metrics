@@ -3,7 +3,7 @@
         <!-- Botón agregar -->
         <div class="grid col-start-4 col-span-1 justify-end">
             <div class="flex justify-center">
-            <a role="button" tabindex="0" wire:click="$set('showUploadModal', true)""
+            <a role="button" tabindex="0" wire:click="$set('showUploadModal', true)"
                 class="inline-flex focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 mr-1">
                     <path d="M7.25 10.25a.75.75 0 0 0 1.5 0V4.56l2.22 2.22a.75.75 0 1 0 1.06-1.06l-3.5-3.5a.75.75 0 0 0-1.06 0l-3.5 3.5a.75.75 0 0 0 1.06 1.06l2.22-2.22v5.69Z" />
