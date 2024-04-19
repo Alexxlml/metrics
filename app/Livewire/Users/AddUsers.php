@@ -12,7 +12,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class AddUsers extends Component
 {
     use LivewireAlert;
-    
+
     protected $listeners = [
         'confirmed'
     ];
@@ -67,6 +67,8 @@ class AddUsers extends Component
                 ]);
 
                 $new_user->assignRole($this->selectedRole);
+
+                $this->reset();
 
                 $this->alert('success', 'Usuario agregado', [
                     'position' => 'center',
