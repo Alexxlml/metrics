@@ -52,6 +52,11 @@ class MainUsers extends Component
         ]);
     }
 
+    public function updatedPerPage()
+    {
+        $this->resetPage();
+    }
+
     public function changeSortBy($sortBy)
     {
         $this->sortBy = $sortBy;
