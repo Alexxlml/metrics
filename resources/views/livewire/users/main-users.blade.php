@@ -153,7 +153,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $users->links('pagination::tailwind') }}
+        {{ $users->links() }}
     </div>
 
     <!-- Upload file modal -->

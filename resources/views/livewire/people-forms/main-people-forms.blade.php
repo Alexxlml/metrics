@@ -221,7 +221,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $forms->links('pagination::tailwind') }}
+                    {{ $forms->links() }}
                 </div>
             </div>
         </div>

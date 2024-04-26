@@ -109,7 +109,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $incidents->links('pagination::tailwind') }}
+                    {{ $incidents->links() }}
                 </div>
             </div>
         </div>

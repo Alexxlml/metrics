@@ -235,7 +235,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $subordinates->links('pagination::tailwind') }}
+                    {{ $subordinates->links() }}
                 </div>
             </div>
         </div>
