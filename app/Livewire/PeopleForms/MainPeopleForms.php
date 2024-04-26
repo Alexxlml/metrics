@@ -68,10 +68,10 @@ class MainPeopleForms extends Component
             'forms' => PeopleForm::with('neighborhood.town')
                 ->where('user_id', $this->userFromView)
                 ->where('id', 'LIKE', "%{$this->search}%")
-                ->orWhere('first_name', 'LIKE', "%{$this->search}%")
-                ->orWhere('second_name', 'LIKE', "%{$this->search}%")
-                ->orWhere('first_surname', 'LIKE', "%{$this->search}%")
-                ->orWhere('second_surname', 'LIKE', "%{$this->search}%")
+                ->where('first_name', 'LIKE', "%{$this->search}%")
+                ->where('second_name', 'LIKE', "%{$this->search}%")
+                ->where('first_surname', 'LIKE', "%{$this->search}%")
+                ->where('second_surname', 'LIKE', "%{$this->search}%")
                 ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
                 ->paginate($this->perPage),
             'count_forms' => PeopleForm::where('user_id', $this->userFromView)->count(),
