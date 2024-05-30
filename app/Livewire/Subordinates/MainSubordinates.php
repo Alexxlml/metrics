@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Subordinates;
 
-use App\Models\PeopleForm;
 use Exception;
 use App\Models\User;
 use Livewire\Component;
+use App\Models\PeopleForm;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class MainSubordinates extends Component
 {
     use WithPagination;
+    use LivewireAlert;
 
     // * Variables barra de búsqueda
     public $search = "";
@@ -100,17 +102,32 @@ class MainSubordinates extends Component
         $count_forms = PeopleForm::where('user_id', $id)->count();
         $forms = PeopleForm::where('user_id', $id)->get();
 
-        $pdf = Pdf::loadView('pdf.capturer_report', ['forms' => $forms])->setPaper('letter');
+        if ($forms->isEmpty()) {
+            $this->sendNotPeopleFormsNotification();
+        } else {
 
-        $pdf->output();
-        $domPdf = $pdf->getDomPDF();
+            $pdf = Pdf::loadView('pdf.capturer_report', ['forms' => $forms])->setPaper('letter');
 
-        $canvas = $domPdf->get_canvas();
-        $canvas->page_text(10, 10, $capturer->name . ' - Total: ' . $count_forms . ' - Página {PAGE_NUM} de {PAGE_COUNT}', null, 10, [0, 0, 0]);
+            $pdf->output();
+            $domPdf = $pdf->getDomPDF();
 
-        return response()->streamDownload(function () use ($pdf) {
-            echo $pdf->stream();
-        }, 'reporte_' . str_replace(' ', '_', strtolower($capturer->name)) . '.pdf');
+            $canvas = $domPdf->get_canvas();
+            $canvas->page_text(10, 10, $capturer->name . ' - Total: ' . $count_forms . ' - Página {PAGE_NUM} de {PAGE_COUNT}', null, 10, [0, 0, 0]);
+
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->stream();
+            }, 'reporte_' . str_replace(' ', '_', strtolower($capturer->name)) . '.pdf');
+        }
+    }
+
+    public function sendNotPeopleFormsNotification()
+    {
+        $this->alert('error', 'Este capturista no tiene registros', [
+            'position' => 'center',
+            'timer' => '3000',
+            'toast' => false,
+            'timerProgressBar' => true,
+        ]);
     }
 
     public function checkuserFromViewOrBoss($user_from_view): bool
